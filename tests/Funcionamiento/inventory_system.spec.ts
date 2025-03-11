@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { describe, expect, expectTypeOf, it, test, vi, afterEach} from "vitest";
-import { InventorySystem } from '../src/inventory_system';
-import { Merchant } from "../src/mercants";
-import { Good } from "../src/goods";
-import { Customer } from "../src/other_clients";
+import { InventorySystem } from '../../src/inventory_system';
+import { Merchant } from "../../src/mercants";
+import { Good } from "../../src/goods";
+import { Customer } from "../../src/other_clients";
 //import exp from "constants";
 
 const customer1 = new Customer(1, "Geralt", "Brujo", "Rivia");
