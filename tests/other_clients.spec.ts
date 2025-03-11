@@ -7,16 +7,16 @@ const customer1 = new Customer(1, "Geralt", "Brujo", "Rivia");
 const customer2 = new Customer(2, "Doni", "Enano", "Novigrado");
 
 describe("Pruebas de Customer", () => {
-  test("Prueba básica de inicialización"), () => {
+  test("Prueba básica de inicialización", () => {
     expect(customer1.id).toBe(1);
     expect(customer1.name).toBe("Geralt");
     expect(customer1.race).toBe("Brujo");
     expect(customer1.location).toBe("Rivia");
-  }
-  test("Prueba básica de inicialización 2"), () => {
+  });
+  test("Prueba básica de inicialización 2", () => {
     expect(customer2.id).toBe(2);
     expect(customer2.name).toBe("Doni");
     expect(customer2.race).toBe("Enano");
     expect(customer2.location).toBe("Novigrado");
-  }
+  });
 });
