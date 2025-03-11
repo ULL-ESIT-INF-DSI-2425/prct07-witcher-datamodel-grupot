@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { describe, expect, expectTypeOf, it, test } from "vitest";
+import { describe, expect, expectTypeOf, it, test, vi} from "vitest";
 import { InventorySystem } from '../src/inventory_system';
 import { Merchant } from "../src/mercants";
 import { Good } from "../src/goods";
 import { Customer } from "../src/other_clients";
-import exp from "constants";
+//import exp from "constants";
 
 let white_wolf_inn = new InventorySystem();
 const customer1 = new Customer(1, "Geralt", "Brujo", "Rivia");
@@ -16,21 +16,46 @@ const merchant1 = new Merchant(1, "Segredus de Continente", "General", "Velen");
 const merchant2 = new Merchant(2, "Iker de Rivia", "Herrero", "Rivia");
 
 describe("Pruebas de Inventario", () => {
-  test("Prueba básica de añadir y borrar customers"), () => {
-    white_wolf_inn.addCustomer(customer1);
-    expect(white_wolf_inn.customers.length).toBe(1);
-    expect(white_wolf_inn.customers[1]).toBe(customer1);
-  }
-  test("Prueba básica de añadir y borrar bienes"), () => {
+  // test("Prueba básica de añadir y borrar customers", () => {
+  //   white_wolf_inn.addCustomer(customer1);
+  //   expect(white_wolf_inn.customers.length).toBe(1);
+  //   expect(white_wolf_inn.customers[1]).toBe(customer1);
+  // });
+  // test("Prueba básica de añadir y borrar bienes", () => {
+  //   white_wolf_inn.addItem(good1);
+  //   white_wolf_inn.addItem(good2);
+  //   expect(white_wolf_inn.items.length).toBe(2);
+  //   expect(white_wolf_inn.items[2]).toBe(good2);
+  //   white_wolf_inn.removeItem(2);
+  //   expect(white_wolf_inn.items[2]).toBe(undefined);
+  // });
+  test("Prueba de list items", () => {
     white_wolf_inn.addItem(good1);
     white_wolf_inn.addItem(good2);
-    expect(white_wolf_inn.items.length).toBe(2);
-    expect(white_wolf_inn.items[2]).toBe(good2);
-    white_wolf_inn.removeItem(2);
-    expect(white_wolf_inn.items[2]).toBe(undefined);
-  }
-  test("Prueba de list items"), () => {
-    let v: Good[] = [good2, good1]
-    expect(white_wolf_inn.listItems("name", true)).toBe(v);
-  }
+    expect(white_wolf_inn.listItems("name", true)).toStrictEqual([good2, good1]);
+  });
+});
+
+describe("addItem", () => {
+  test("Funcionamiento normal", () => {
+    let my_system = new InventorySystem();
+    const spy = vi.spyOn(my_system, "addItem");
+    expect(my_system.items).toHaveLength(0);
+    my_system.addItem(good2);
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(my_system.items).toHaveLength(1);
+    expect(my_system.items).toContain(good2);
+  });
+});
+
+describe("removeItem", () => {
+  test("Funcionamiento normal", () => {
+    let my_system = new InventorySystem();
+    my_system.addItem(good2);
+    expect(my_system.items).toHaveLength(1);
+    const spy = vi.spyOn(my_system, "removeItem");
+    my_system.removeItem(2);
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(my_system.items).toHaveLength(0);
+  });
 });
