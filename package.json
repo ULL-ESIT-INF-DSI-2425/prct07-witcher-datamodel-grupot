@@ -9,16 +9,23 @@
     "ej1": "node dist/ej-1.js"
   },
   "keywords": [],
-  "author": "Iker Díaz Cabrera",
+  "author": "Iker Díaz Cabrera, Alejandro Martín Linares",
   "license": "ISC",
+  "type": "module",
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@types/inquirer": "^9.0.3",
+    "@types/lowdb": "^1.0.15",
     "eslint": "^9.20.1",
     "eslint-plugin-tsdoc": "^0.4.0",
     "globals": "^15.15.0",
     "typedoc": "^0.27.7",
     "typescript-eslint": "^8.24.0",
     "vitest": "^3.0.5"
+  },
+  "dependencies": {
+    "inquirer": "^9.1.4",
+    "lowdb": "^5.1.0"
   }
 }
