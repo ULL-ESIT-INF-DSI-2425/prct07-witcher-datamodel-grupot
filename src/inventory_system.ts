@@ -1,6 +1,6 @@
-import { Good } from "./goods";
-import { Merchant } from './mercants';
-import { Customer } from "./other_clients";
+import { Good } from './goods.js';
+import { Merchant } from './mercants.js';
+import { Customer } from "./other_clients.js";
 
 // Clase de gestión del inventario
 export class InventorySystem {
@@ -77,9 +77,9 @@ export class InventorySystem {
    * Método que nos permite encontrar a un mercader 
    * dentro de nuestro sistema mediante su nombre
    * @param name - (string) nombre del mercader
-   * @returns - (merchant)
+   * @returns - (Merchant | undefined)
    */
-  findMerchantByName(name: string): Merchant {
+  findMerchantByName(name: string): Merchant | undefined {
     return this._merchants.find(m => m.name.toLowerCase() === name.toLowerCase());
   }
 
@@ -87,9 +87,9 @@ export class InventorySystem {
    * Método que nos permite encontrar a un cliente 
    * dentro de nuestro sistema mediante su nombre
    * @param name - (string)
-   * @returns - (Customer)
+   * @returns - (Customer | undefined)
    */
-  findCustomerByName(name: string): Customer {
+  findCustomerByName(name: string): Customer | undefined {
     return this._customers.find(c => c.name.toLowerCase() === name.toLowerCase());
   }
 }
