@@ -68,7 +68,7 @@ describe("removeItem", () => {
   });
 });
 
-describe("Manipulación de customers", () => {
+describe("Manipulación y visualización de customers", () => {
   afterEach(() => {
     vi.restoreAllMocks(); 
   });
@@ -84,14 +84,52 @@ describe("Manipulación de customers", () => {
     expect(spy).toHaveBeenCalledTimes(2);
   });
 
+  test("Visualización de clientes", () => {
+    expect(my_system.findCustomerByName("Doni")).toStrictEqual(customer2);
+    expect(my_system.findCustomerByName("geralt")).toStrictEqual(customer1);
+  });
+
   test("Eliminación de clientes", () => {
     expect(my_system.customers).toHaveLength(2);
     const spy = vi.spyOn(my_system, "removeCustomer");
-    my_system.removeCustomer(customer1);
+    my_system.removeCustomer(1);
     expect(my_system.customers).toHaveLength(1);
     expect(spy).toHaveBeenCalledTimes(1);
-    my_system.removeCustomer(customer2);
+    my_system.removeCustomer(2);
     expect(my_system.customers).toHaveLength(0);
+    expect(spy).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe("Manipulación y visualización de merchants", () => {
+  afterEach(() => {
+    vi.restoreAllMocks(); 
+  });
+
+  let my_system = new InventorySystem();
+  test("Adicion de mercaderes", () => {
+    const spy = vi.spyOn(my_system, "addMerchant");
+    my_system.addMerchant(merchant1);
+    expect(my_system.merchants).toHaveLength(1);
+    expect(spy).toHaveBeenCalledTimes(1);
+    my_system.addMerchant(merchant2);
+    expect(my_system.merchants).toHaveLength(2);
+    expect(spy).toHaveBeenCalledTimes(2);
+  });
+
+  test("Visualización de mercaderes", () => {
+    expect(my_system.findCustomerByName("iker de rivia")).toStrictEqual(merchant2);
+    expect(my_system.findCustomerByName("Segredus de Continente")).toStrictEqual(merchant1);
+  });
+
+  test("Eliminación de mercaderes", () => {
+    expect(my_system.merchants).toHaveLength(2);
+    const spy = vi.spyOn(my_system, "removeMerchant");
+    my_system.removeMerchant(1);
+    expect(my_system.merchants).toHaveLength(1);
+    expect(spy).toHaveBeenCalledTimes(1);
+    my_system.removeMerchant(2);
+    expect(my_system.merchants).toHaveLength(0);
     expect(spy).toHaveBeenCalledTimes(2);
   });
 });
