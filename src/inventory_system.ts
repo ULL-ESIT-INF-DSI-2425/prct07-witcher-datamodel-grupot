@@ -50,11 +50,27 @@ export class InventorySystem {
   }
 
   /**
-   * Método que añade un cliente a nuestro sistema
-   * @param customer 
+   * Elimina un mercader con un id específico
+   * @param merchantId - (number)
    */
-  addCustomer(customer: Customer) {
+  removeMerchant(merchantId: number): void {
+    this._merchants = this._merchants.filter(merchant => merchant.id !== merchantId);
+  }
+
+  /**
+   * Método que añade un cliente a nuestro sistema
+   * @param customer - (Customer)
+   */
+  addCustomer(customer: Customer): void {
     this._customers.push(customer);
+  }
+
+  /**
+   * Elimina un cliente con un id específico
+   * @param customersId - (number)
+   */
+  removeCustomer(customersId: number): void {
+    this._customers = this._customers.filter(customer => customer.id !== customersId);
   }
 
   /**

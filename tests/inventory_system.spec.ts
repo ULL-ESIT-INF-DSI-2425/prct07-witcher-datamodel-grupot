@@ -118,8 +118,8 @@ describe("Manipulación y visualización de merchants", () => {
   });
 
   test("Visualización de mercaderes", () => {
-    expect(my_system.findCustomerByName("iker de rivia")).toStrictEqual(merchant2);
-    expect(my_system.findCustomerByName("Segredus de Continente")).toStrictEqual(merchant1);
+    expect(my_system.findMerchantByName("iker de rivia")).toStrictEqual(merchant2);
+    expect(my_system.findMerchantByName("Segredus de Continente")).toStrictEqual(merchant1);
   });
 
   test("Eliminación de mercaderes", () => {
