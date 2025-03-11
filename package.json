@@ -6,7 +6,8 @@
     "build": "tsc",
     "test": "vitest run",
     "doc": "typedoc",
-    "ej1": "node dist/ej-1.js"
+    "ej1": "node dist/ej-1.js",
+    "coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "Iker Díaz Cabrera, Alejandro Martín Linares",
@@ -17,6 +18,7 @@
     "@eslint/js": "^9.20.0",
     "@types/inquirer": "^9.0.3",
     "@types/lowdb": "^1.0.15",
+    "@vitest/coverage-v8": "^3.0.5",
     "eslint": "^9.20.1",
     "eslint-plugin-tsdoc": "^0.4.0",
     "globals": "^15.15.0",
