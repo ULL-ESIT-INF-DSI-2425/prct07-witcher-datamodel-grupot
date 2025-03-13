@@ -46,17 +46,17 @@ describe('InventoryCLI', () => {
     vi.clearAllMocks();
   });
 
-  // it('debe llamar a manageGoods cuando se selecciona "Gestionar bienes"', async () => {
-  //   vi.mocked(inquirer.prompt).mockResolvedValueOnce({ option: 'Gestionar bienes' });
-  //   vi.mocked(inquirer.prompt).mockResolvedValueOnce({ action: 'Volver' });
-  //   await inventoryCLI.mainMenu();
-  //   expect(inquirer.prompt).toHaveBeenCalledWith({
-  //     type: "list",
-  //     name: "action",
-  //     message: "¿Qué deseas hacer?",
-  //     choices: ["Agregar bien", "Eliminar bien", "Listar bienes", "Volver"],
-  //   });
-  // });
+  it('debe llamar a manageGoods cuando se selecciona "Gestionar bienes"', async () => {
+    vi.mocked(inquirer.prompt).mockResolvedValueOnce({ option: 'Gestionar bienes' });
+    vi.mocked(inquirer.prompt).mockResolvedValueOnce({ action: 'Volver' });
+    await inventoryCLI.mainMenu();
+    expect(inquirer.prompt).toHaveBeenCalledWith({
+      type: "list",
+      name: "action",
+      message: "¿Qué deseas hacer?",
+      choices: ["Agregar bien", "Eliminar bien", "Listar bienes", "Volver"],
+    });
+  });
 
   it('debe agregar un bien cuando se selecciona "Agregar bien"', async () => {
     vi.mocked(inquirer.prompt)
