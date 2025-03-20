@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { describe, expect, expectTypeOf, it, test } from "vitest";
 import { Merchant } from '../../src/mercants';
 

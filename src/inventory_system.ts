@@ -1,12 +1,14 @@
 import { Good } from './goods.js';
 import { Merchant } from './mercants.js';
 import { Customer } from "./other_clients.js";
+import { Transaction } from './transaction.js';
 
 // Clase de gestión del inventario
 export class InventorySystem {
   private _items: Good[] = [];
   private _merchants: Merchant[] = [];
   private _customers: Customer[] = [];
+  private transactions: Transaction[] = [];
 
   get items() { return this._items; };
   get merchants() { return this._merchants; }; 
@@ -91,5 +93,23 @@ export class InventorySystem {
    */
   findCustomerByName(name: string): Customer | undefined {
     return this._customers.find(c => c.name.toLowerCase() === name.toLowerCase());
+  }
+
+  /**
+   * Método que nos permite añadir una transacción
+   * a un vector de almacenamiento
+   * @param transaction - (Transaction)
+   */
+  recordTransaction(transaction: Transaction) {
+    this.transactions.push(transaction);
+  }
+  
+  /**
+   * Método que nos devuelve todas las transacciones
+   * del vector de almacenamiento
+   * @returns Lista de transacciones
+   */
+  listTransactions() {
+    return this.transactions;
   }
 }
