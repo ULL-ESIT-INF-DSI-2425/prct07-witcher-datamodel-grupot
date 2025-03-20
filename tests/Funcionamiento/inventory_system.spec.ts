@@ -9,10 +9,16 @@ import { Customer } from "../../src/other_clients";
 
 const customer1 = new Customer(1, "Geralt", "Brujo", "Rivia");
 const customer2 = new Customer(2, "Doni", "Enano", "Novigrado");
+// Se va a modificr
+const customer3 = new Customer(3, "Doni", "Enano", "Novigrado");
 const good1 = new Good(1, "Pocion de Golondrina", "Pocion de Brujo", "Murcielago", 0.1, 100);
 const good2 = new Good(2, "Colonia de Lirio y Grosellas", "Una colonia muy especial", "Lirios y grosellas", 0.7, 60);
+// Se modifica el good3
+const good3 = new Good(3, "Colonia de Lirio y Grosellas", "Una colonia muy especial", "Lirios y grosellas", 0.7, 60);
 const merchant1 = new Merchant(1, "Segredus de Continente", "General", "Velen");
 const merchant2 = new Merchant(2, "Iker de Rivia", "Herrero", "Rivia");
+// Se va a modificar
+const merchant3 = new Merchant(3, "Iker de Rivia", "Herrero", "Rivia");
 
 describe("listItems", () => {
   test("Funcionamiento normal", () => {
@@ -55,6 +61,38 @@ describe("removeItem", () => {
   });
 });
 
+
+describe("Modificar item", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+  test("Funcionamiento normal", () => {
+    let my_system = new InventorySystem();
+    my_system.addItem(good3);  
+    // const good3 = new Good(2, "Colonia de Lirio y Grosellas", "Una colonia muy especial", "Lirios y grosellas", 0.7, 60);
+    my_system.updateGood(3, 'Colonia vacia', undefined, undefined, undefined, undefined);
+    const good = my_system.items.find(item => item.id === 3);
+    expect(good.name).toBe('Colonia vacia');
+    expect(good.description).toBe('Una colonia muy especial');
+    expect(good.material).toBe('Lirios y grosellas');
+    expect(good.weight).toBe(0.7);
+    expect(good.value).toBe(60);
+  });
+  test("Funcionamiento normal", () => {
+    let my_system = new InventorySystem();
+    my_system.addItem(good3);  
+    // const good3 = new Good(2, "Colonia de Lirio y Grosellas", "Una colonia muy especial", "Lirios y grosellas", 0.7, 60);
+    my_system.updateGood(3, undefined, 'recipiente vacio', 'nada', 0.3, 10);
+    const good = my_system.items.find(item => item.id === 3);
+    expect(good.name).toBe('Colonia vacia');
+    expect(good.description).toBe('recipiente vacio');
+    expect(good.material).toBe('nada');
+    expect(good.weight).toBe(0.3);
+    expect(good.value).toBe(10);
+  });
+});  
+
+
 describe("Manipulación y visualización de customers", () => {
   afterEach(() => {
     vi.restoreAllMocks(); 
@@ -86,6 +124,15 @@ describe("Manipulación y visualización de customers", () => {
     expect(my_system.customers).toHaveLength(0);
     expect(spy).toHaveBeenCalledTimes(2);
   });
+
+   test('actualiza solo la ubicación de un cliente sin modificar otros atributos', () => {
+      my_system.updateCustomer(1, undefined, undefined, 'Ciudad D');
+      const customer = my_system.customers.find(c => c.id === 3);
+      expect(customer).toBeDefined();
+      expect(customer?.location).toBe('Ciudad D');
+      expect(customer?.name).toBe('Doni');
+      expect(customer?.race).toBe('Enano');
+   });
 });
 
 describe("Manipulación y visualización de merchants", () => {
@@ -119,4 +166,16 @@ describe("Manipulación y visualización de merchants", () => {
     expect(my_system.merchants).toHaveLength(0);
     expect(spy).toHaveBeenCalledTimes(2);
   });
+  test('actualiza solo la ubicación de un mercader sin modificar otros atributos', () => {
+    my_system.addMerchant(merchant3);
+    my_system.updateMerchant(3, undefined, undefined, 'Ciudad C');
+   
+    const merchant = my_system.merchants.find(m => m.id === 3);
+    expect(merchant).toBeDefined();
+    expect(merchant.location).toBe('Ciudad C');
+    expect(merchant.name).toBe('Iker de Rivia');
+    expect(merchant.type).toBe('Herrero');
+  });
+
+
 });

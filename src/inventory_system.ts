@@ -31,6 +31,27 @@ export class InventorySystem {
   }
 
   /**
+   * Modifica un bien existente en el inventario
+   * @param id - (number) ID del bien a modificar.
+   * @param name - (string?) nuevo nombre.
+   * @param description - (string?) nueva descripción.
+   * @param material - (string?) nuevo material.
+   * @param weight - (number?) nuevo peso.
+   * @param value - (number?) nuevo valor.
+   */
+  updateGood( id: number, name?: string, description?: string, material?: string, weight?: number, value?: number ) {
+    const good = this._items.find(item => item.id === id);
+    if (good) {
+      if (name !== undefined) good.name = name;
+      if (description !== undefined) good.description = description;
+      if (material !== undefined) good.material = material;
+      if (weight !== undefined) good.weight = weight;
+      if (value !== undefined) good.value = value;
+    }
+  }
+
+
+  /**
    * Lista todos los items almacenados en orden ascendente por defecto
    * @param orderBy - (string) ordena los objetos según el atributo seleccionado
    * @param ascending - (bool?) si queremos orden asscendente o descendente
@@ -60,6 +81,21 @@ export class InventorySystem {
   }
 
   /**
+   * Actualiza un mercader existente.
+   * @param id - (number) ID del mercader a modificar.
+   * @param name - (string?) nuevo nombre.
+   * @param type - (string?) nuevo tipo.
+   * @param location - (string?) nueva ubicación.
+   */
+  updateMerchant(id: number, name?: string, type?: string, location?: string) {
+  const merchant = this._merchants.find(m => m.id === id);
+  if (merchant) {
+    if (name !== undefined) merchant.name = name;
+    if (type !== undefined) merchant.type = type;
+    if (location !== undefined) merchant.location = location;
+  }
+
+  /**
    * Método que añade un cliente a nuestro sistema
    * @param customer - (Customer)
    */
@@ -73,6 +109,15 @@ export class InventorySystem {
    */
   removeCustomer(customersId: number): void {
     this._customers = this._customers.filter(customer => customer.id !== customersId);
+  }
+
+  updateCustomer( id: number,name?: string, race?: string, location?: string ) {
+    const customer = this._customers.find(c => c.id === id);
+    if (customer) {
+      if (name !== undefined) customer.name = name;
+      if (race !== undefined) customer.race = race;
+      if (location !== undefined) customer.location = location;
+    }
   }
 
   /**
