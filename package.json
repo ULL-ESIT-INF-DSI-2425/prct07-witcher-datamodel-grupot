@@ -10,7 +10,7 @@
     "coverage": "vitest run --coverage"
   },
   "keywords": [],
-  "author": "Iker Díaz Cabrera, Alejandro Martín Linares",
+  "author": "Iker Díaz Cabrera, Alejandro Martín Linares, Ignacio Gomez Carballo",
   "license": "ISC",
   "type": "module",
   "description": "",
