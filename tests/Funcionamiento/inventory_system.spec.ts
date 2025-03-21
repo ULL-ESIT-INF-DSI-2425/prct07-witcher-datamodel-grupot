@@ -126,12 +126,13 @@ describe("Manipulación y visualización de customers", () => {
   });
 
    test('actualiza solo la ubicación de un cliente sin modificar otros atributos', () => {
-      my_system.updateCustomer(1, undefined, undefined, 'Ciudad D');
+      my_system.addCustomer(customer3);
+      my_system.updateCustomer(3, undefined, undefined, 'Ciudad D');
       const customer = my_system.customers.find(c => c.id === 3);
       expect(customer).toBeDefined();
-      expect(customer?.location).toBe('Ciudad D');
-      expect(customer?.name).toBe('Doni');
-      expect(customer?.race).toBe('Enano');
+      expect(customer.location).toBe('Ciudad D');
+      expect(customer.name).toBe('Doni');
+      expect(customer.race).toBe('Enano');
    });
 });
 
@@ -176,6 +177,4 @@ describe("Manipulación y visualización de merchants", () => {
     expect(merchant.name).toBe('Iker de Rivia');
     expect(merchant.type).toBe('Herrero');
   });
-
-
 });
