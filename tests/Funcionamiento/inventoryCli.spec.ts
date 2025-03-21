@@ -47,9 +47,20 @@ describe('InventoryCLI', () => {
   });
 
   it('debe llamar a manageGoods cuando se selecciona "Gestionar bienes"', async () => {
-    vi.mocked(inquirer.prompt).mockResolvedValueOnce({ option: 'Gestionar bienes' });
-    vi.mocked(inquirer.prompt).mockResolvedValueOnce({ action: 'Volver' });
+    const promptMock = vi.mocked(inquirer.prompt);
+    promptMock.mockResolvedValueOnce({ option: "Gestionar bienes" });
+    promptMock.mockResolvedValueOnce({ action: "Volver" });
+    promptMock.mockResolvedValueOnce({ option: "Salir" });
+  
     await inventoryCLI.mainMenu();
+  
+    expect(inquirer.prompt).toHaveBeenCalledWith({
+      type: "list",
+      name: "option",
+      message: "Selecciona una opción:",
+      choices: ["Gestionar bienes", "Consultar mercaderes", "Buscar clientes", "Salir"],
+    });
+  
     expect(inquirer.prompt).toHaveBeenCalledWith({
       type: "list",
       name: "action",

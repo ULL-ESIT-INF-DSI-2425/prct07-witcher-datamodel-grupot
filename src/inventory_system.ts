@@ -88,11 +88,12 @@ export class InventorySystem {
    * @param location - (string?) nueva ubicación.
    */
   updateMerchant(id: number, name?: string, type?: string, location?: string) {
-  const merchant = this._merchants.find(m => m.id === id);
-  if (merchant) {
-    if (name !== undefined) merchant.name = name;
-    if (type !== undefined) merchant.type = type;
-    if (location !== undefined) merchant.location = location;
+    const merchant = this._merchants.find(m => m.id === id);
+    if (merchant) {
+      if (name !== undefined) merchant.name = name;
+      if (type !== undefined) merchant.type = type;
+      if (location !== undefined) merchant.location = location;
+    }
   }
 
   /**

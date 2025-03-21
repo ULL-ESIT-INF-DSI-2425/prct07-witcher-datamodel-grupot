@@ -14,7 +14,7 @@ const transaction2 = new Transaction(2, new Date(2025, 3, 1), merchant2, [good1,
 describe("Pruebas de Transaction", () => {
   test("Prueba básica de inicialización", () => {
     expect(transaction1.id).toBe(1);
-    expect(transaction1.date).toBe(new Date(2025, 1, 2));
+    expect(transaction1.date).toStrictEqual(new Date(2025, 1, 2));
     expect(transaction1.buyerOrSeller).toBe(merchant1);
     expect(transaction1.goods).toBe([good1]);
     expect(transaction1.totalAmount).toBe(2);
@@ -22,7 +22,7 @@ describe("Pruebas de Transaction", () => {
   });
   test("Prueba básica de inicialización 2", () => {
     expect(transaction2.id).toBe(2);
-    expect(transaction2.date).toBe(new Date(2025, 3, 1));
+    expect(transaction2.date).toStrictEqual(new Date(2025, 3, 1));
     expect(transaction2.buyerOrSeller).toBe(merchant2);
     expect(transaction2.goods).toBe([good1, good2]);
     expect(transaction2.totalAmount).toBe(10);
