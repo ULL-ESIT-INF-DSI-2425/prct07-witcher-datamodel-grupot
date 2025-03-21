@@ -11,8 +11,8 @@ export class Merchant {
   get getType() { return this.type; };
   get getLocation() { return this.location; };
 
-  set setId(new_id: number) { this.id = new_id; };
-  set setName(new_name: string) { this.name = new_name; };
-  set setType(new_type: string) { this.type = new_type; };
-  set setLocation(new_location: string) { this.location = new_location; };
+  setId(new_id: number) { this.id = new_id; };
+  setName(new_name: string) { this.name = new_name; };
+  setType(new_type: string) { this.type = new_type; };
+  setLocation(new_location: string) { this.location = new_location; };
 }

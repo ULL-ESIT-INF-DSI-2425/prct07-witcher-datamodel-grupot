@@ -18,4 +18,18 @@ describe("Pruebas de Merchant", () => {
     expect(merchant2.type).toBe("Herrero");
     expect(merchant2.location).toBe("Rivia");
   });
+  test("Pruebas de Setter", () => {
+    expect(merchant1.id).toBe(1);
+    expect(merchant1.name).toBe("Segredus de Continente");
+    expect(merchant1.type).toBe("General");
+    expect(merchant1.location).toBe("Velen");
+    merchant1.setId(3);
+    merchant1.setName("Ignacius el Proteico");
+    merchant1.setType("Joyero");
+    merchant1.setLocation("Kaer Mohgen");
+    expect(merchant1.id).toBe(3);
+    expect(merchant1.name).toBe("Ignacius el Proteico");
+    expect(merchant1.type).toBe("Joyero");
+    expect(merchant1.location).toBe("Kaer Mohgen");
+  });
 });

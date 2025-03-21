@@ -28,4 +28,24 @@ describe("Pruebas de Transaction", () => {
     expect(transaction2.totalAmount).toBe(10);
     expect(transaction2.type).toBe("Venta");
   });
+  test("Pruebas de Setter", () => {
+    expect(transaction1.id).toBe(1);
+    expect(transaction1.date).toStrictEqual(new Date(2025, 1, 2));
+    expect(transaction1.buyerOrSeller).toBe(merchant1);
+    expect(transaction1.goods).toStrictEqual([good1]);
+    expect(transaction1.totalAmount).toBe(2);
+    expect(transaction1.type).toBe("Compra");
+    transaction1.setId(3);
+    transaction1.setDate(new Date(2025, 2, 5));
+    transaction1.setBuyerSeller(merchant2);
+    transaction1.setGoods([good2, good1]);
+    transaction1.setTotalAmount(5);
+    transaction1.setType("Venta");
+    expect(transaction1.id).toBe(3);
+    expect(transaction1.date).toStrictEqual(new Date(2025, 2, 5));
+    expect(transaction1.buyerOrSeller).toBe(merchant2);
+    expect(transaction1.goods).toStrictEqual([good2, good1]);
+    expect(transaction1.totalAmount).toBe(5);
+    expect(transaction1.type).toBe("Venta");
+  });
 });

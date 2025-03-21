@@ -22,4 +22,24 @@ describe("Pruebas de Goods", () => {
     expect(good2.weight).toBe(0.7);
     expect(good2.value).toBe(60);
   });
+  test("Pruebas de Setter", () => {
+    expect(good1.id).toBe(1);
+    expect(good1.name).toBe("Pocion de Golondrina");
+    expect(good1.description).toBe("Pocion de Brujo");
+    expect(good1.material).toBe("Murcielago");
+    expect(good1.weight).toBe(0.1);
+    expect(good1.value).toBe(100);
+    good1.setId(3);
+    good1.setName("Colonia de Lobo Blanco");
+    good1.setDescription("Una colonia rara");
+    good1.setMaterial("Aceite de Lobo");
+    good1.setWeight(0.7);
+    good1.setValue(30);
+    expect(good1.id).toBe(3);
+    expect(good1.name).toBe("Colonia de Lobo Blanco");
+    expect(good1.description).toBe("Una colonia rara");
+    expect(good1.material).toBe("Aceite de Lobo");
+    expect(good1.weight).toBe(0.7);
+    expect(good1.value).toBe(30);
+  });
 });

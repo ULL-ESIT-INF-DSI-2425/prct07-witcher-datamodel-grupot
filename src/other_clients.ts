@@ -11,8 +11,8 @@ export class Customer {
   get getRace() { return this.race; };
   get getLocation() { return this.location; };
 
-  set setId(new_id: number) { this.id = new_id; };
-  set setName(new_name: string) { this.name = new_name; };
-  set setRace(new_race: string) { this.race = new_race; };
-  set setLocation(new_location: string) { this.location = new_location; };
+  setId(new_id: number) { this.id = new_id; };
+  setName(new_name: string) { this.name = new_name; };
+  setRace(new_race: string) { this.race = new_race; };
+  setLocation(new_location: string) { this.location = new_location; };
 }
