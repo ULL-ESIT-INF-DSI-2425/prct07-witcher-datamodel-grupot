@@ -13,7 +13,6 @@ export class InventoryCLI {
   private customerManager: CustomerManager;
   private transactionManager: TransactionManager;
 
-
   constructor(inventory: GoodsManager, merchantManager: MerchantManager, 
     customerManager: CustomerManager, transactionManager: TransactionManager) {
     this.inventory = inventory;
