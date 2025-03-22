@@ -12,6 +12,11 @@ export class reportGen {
     this.transactions = transactions;
   }
 
+  /**
+   * Nos permite consultar el stock que tenemos en el inventario
+   * tenemos opciones de elección mediante inquirer
+   * @returns void
+   */
   public async consultarStock(): Promise<void> {
     const items = this.inventory.items;
     if (items.length === 0) {
@@ -37,6 +42,12 @@ export class reportGen {
     });
   }
 
+  /**
+   * Nos permite consultar los vienes mas vendidos de
+   * la posada, si no tenemos ventas o transacciones se 
+   * nos notificará
+   * @returns void
+   */
   public async consultarBienesMasVendidos(): Promise<void> {
     const transactions = this.transactions.getTransactions;
     if (transactions.length === 0) {
@@ -65,6 +76,11 @@ export class reportGen {
     });
   }
 
+  /**
+   * Nos permite calcular automáticamente los ingresos y 
+   * gastos según las transacciones realizadas en la posada
+   * @returns void
+   */
   public async calcularIngresosYGastos(): Promise<void> {
     const transactions = this.transactions.getTransactions;
     if (transactions.length === 0) {
@@ -87,5 +103,31 @@ export class reportGen {
     console.log('\nResumen de ingresos y gastos:');
     console.log(`Total de ingresos por ventas: ${totalVentas} monedas`);
     console.log(`Total de gastos en adquisiciones: ${totalCompras} monedas`);
+  }
+
+  /**
+   * Nos permite consultar el historico de alguien 
+   * mediante el nombre de la persona
+   * @returns void
+   */
+  public async consultarHistorico(): Promise<void> {
+    const { nombre } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'nombre',
+        message: 'Ingrese el nombre del cliente o mercader para consultar su historial de transacciones:'
+      }
+    ]);
+    const transactions = this.transactions.getTransactions.filter(transaction => 
+      transaction.getBuyerSeller.getName.toLowerCase() === nombre.toLowerCase()
+    );
+    if (transactions.length === 0) {
+      console.log(`No se encontraron transacciones para '${nombre}'.`);
+      return;
+    }
+    console.log(`\nHistorial de transacciones para '${nombre}':`);
+    transactions.forEach(transaction => {
+      console.log(transaction.getSummary());
+    });
   }
 }

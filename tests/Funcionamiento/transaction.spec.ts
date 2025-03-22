@@ -82,7 +82,7 @@ describe("Pruebas de Transaction", () => {
   test("Generar correctamente un resumen de la transacción", () => {
     const summary = transaction2.getSummary();
     expect(summary).toContain("ID: 2");
-    expect(summary).toContain("Fecha: 2025-04-01T00:00:00.000Z");
+    expect(summary).toContain("Fecha: 01/04/2025");
     expect(summary).toContain("Tipo: Venta");
     expect(summary).toContain("Total: 100 monedas");
     expect(summary).toContain("Número de bienes: 1");

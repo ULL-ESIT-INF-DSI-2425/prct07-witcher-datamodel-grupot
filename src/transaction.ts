@@ -64,11 +64,14 @@ isValid(): boolean {
 }
 
 
-/**
- * Devuelve un resumen de la transacción en formato string.
- * @returns Resumen de la transacción.
- */
-getSummary(): string {
-  return `ID: ${this.id}\nFecha: ${this.date.toISOString()}\nTipo: ${this.type}\nTotal: ${this.totalAmount} monedas\nNúmero de bienes: ${this.goods.length}`;
-}
+  /**
+   * Devuelve un resumen de la transacción en formato string.
+   * @returns Resumen de la transacción.
+   */
+  getSummary(): string {
+    const day = String(this.date.getDate()).padStart(2, '0');
+    const month = String(this.date.getMonth() + 1).padStart(2, '0'); // Se suma 1 a getMonth()
+    const year = this.date.getFullYear();
+    return `ID: ${this.id}\nFecha: ${day}/${month}/${year}\nTipo: ${this.type}\nTotal: ${this.totalAmount} monedas\nNúmero de bienes: ${this.goods.length}`;
+  }
 }

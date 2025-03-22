@@ -144,3 +144,48 @@ describe('consultarIngresosYGastos', () => {
     consoleSpy.mockRestore();
   });
 });
+
+describe('consultarHistorico', () => {
+  let inventory: GoodsManager;
+  let informe: reportGen;
+  let transacciones: TransactionManager;
+  const good1 = new Good(1, "Espada de Acero", "Una espada afilada hecha de acero de alta calidad.", "Acero", 2.5, 300);
+  const good2 = new Good(2, "Escudo de Madera", "Un escudo resistente hecho de roble.", "Madera", 1.8, 150 );
+  const good3 = new Good(3, "Poción de Salud", "Una poción mágica que restaura la salud.", "Vidrio", 0.5, 50 );
+  const merchant = new Merchant( 1, "El Mercader Errante", "Comerciante de armas y pociones", "Ciudad de Acero");
+  const customer = new Customer( 1, "Aragorn", "Humano", "Rivendell");
+  const transaction1 = new Transaction(1, new Date("2023-05-10"), customer, [good1, good3], 1, "Compra");
+  const transaction2 = new Transaction(2, new Date("2023-05-10"), merchant, [good2], 0, "Venta");
+  const transaction3 = new Transaction(3, new Date("2023-05-10"), customer, [good1], 1, "Devolución");
+
+  beforeEach(() => {
+    inventory = new GoodsManager();
+    inventory.addItem(new Good(1, 'Espada de Fuego', 'Una espada ardiente', 'Hierro', 3.5, 100));
+    inventory.addItem(new Good(2, 'Escudo de Hierro', 'Un escudo resistente', 'Hierro', 5.0, 75));
+    transacciones = new TransactionManager();
+    transacciones.addTransaction(transaction1);
+    transacciones.addTransaction(transaction2);
+    transacciones.addTransaction(transaction3);
+    informe = new reportGen(inventory, transacciones);
+  });
+
+  test('debería mostrar un mensaje si no hay transacciones para esa persona', async () => {
+    const promptSpy = vi.spyOn(inquirer, 'prompt').mockResolvedValue({ nombre: 'Pepe' });
+    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    await informe.consultarHistorico();
+    expect(consoleSpy).toHaveBeenCalledWith('No se encontraron transacciones para \'Pepe\'.');
+    promptSpy.mockRestore();
+    consoleSpy.mockRestore();
+  });
+
+  test('debería mostrar la información de las transacciones de la persona', async () => {
+    const promptSpy = vi.spyOn(inquirer, 'prompt').mockResolvedValue({ nombre: 'Aragorn' });
+    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    await informe.consultarHistorico();
+    expect(consoleSpy).toHaveBeenCalledWith('\nHistorial de transacciones para \'Aragorn\':');
+    expect(consoleSpy).toHaveBeenCalledWith("ID: 1\nFecha: 10/05/2023\nTipo: Compra\nTotal: 1 monedas\nNúmero de bienes: 2");
+    expect(consoleSpy).toHaveBeenCalledWith("ID: 3\nFecha: 10/05/2023\nTipo: Devolución\nTotal: 1 monedas\nNúmero de bienes: 1");
+    promptSpy.mockRestore();
+    consoleSpy.mockRestore();
+  });
+});
