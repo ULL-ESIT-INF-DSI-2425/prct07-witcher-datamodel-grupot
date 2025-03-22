@@ -48,7 +48,6 @@ describe('consultarStock', () => {
   });
 });
 
-
 describe('consultarBienesMasVendidos', () => {
   let inventory: GoodsManager;
   let informe: reportGen;
@@ -98,6 +97,50 @@ describe('consultarBienesMasVendidos', () => {
     const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     await informe.consultarBienesMasVendidos();
     expect(consoleSpy).toHaveBeenCalledWith('No se han registrado ventas de bienes.');
+    consoleSpy.mockRestore();
+  });
+});
+
+describe('consultarIngresosYGastos', () => {
+  let inventory: GoodsManager;
+  let informe: reportGen;
+  let transacciones: TransactionManager;
+  const good1 = new Good(1, "Espada de Acero", "Una espada afilada hecha de acero de alta calidad.", "Acero", 2.5, 300);
+  const good2 = new Good(2, "Escudo de Madera", "Un escudo resistente hecho de roble.", "Madera", 1.8, 150 );
+  const good3 = new Good(3, "Poción de Salud", "Una poción mágica que restaura la salud.", "Vidrio", 0.5, 50 );
+  const merchant = new Merchant( 1, "El Mercader Errante", "Comerciante de armas y pociones", "Ciudad de Acero");
+  const customer = new Customer( 1, "Aragorn", "Humano", "Rivendell");
+  const transaction1 = new Transaction(1, new Date(), customer, [good1, good3], 0, "Compra");
+  const transaction2 = new Transaction(2, new Date(), merchant, [good2], 0, "Venta");
+  const transaction3 = new Transaction(3, new Date(), customer, [good1], 0, "Devolución");
+
+  beforeEach(() => {
+    inventory = new GoodsManager();
+    inventory.addItem(new Good(1, 'Espada de Fuego', 'Una espada ardiente', 'Hierro', 3.5, 100));
+    inventory.addItem(new Good(2, 'Escudo de Hierro', 'Un escudo resistente', 'Hierro', 5.0, 75));
+    transacciones = new TransactionManager();
+    transacciones.addTransaction(transaction1);
+    transacciones.addTransaction(transaction2);
+    transacciones.addTransaction(transaction3);
+    informe = new reportGen(inventory, transacciones);
+  });
+
+  test('debería mostrar un mensaje si no hay transacciones', async () => {
+    inventory = new GoodsManager();
+    transacciones = new TransactionManager(); 
+    informe = new reportGen(inventory, transacciones);
+    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    await informe.calcularIngresosYGastos();
+    expect(consoleSpy).toHaveBeenCalledWith('No hay transacciones registradas.');
+    consoleSpy.mockRestore();
+  });
+
+  test('debería mostrar la información de los gastos e ingresos', async () => {
+    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    await informe.calcularIngresosYGastos();
+    expect(consoleSpy).toHaveBeenCalledWith('\nResumen de ingresos y gastos:');
+    expect(consoleSpy).toHaveBeenCalledWith("Total de ingresos por ventas: 150 monedas");
+    expect(consoleSpy).toHaveBeenCalledWith("Total de gastos en adquisiciones: 350 monedas");
     consoleSpy.mockRestore();
   });
 });
