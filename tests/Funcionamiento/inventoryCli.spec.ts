@@ -16,7 +16,7 @@ import { Good } from "../../src/goods.js";
  * }));
  * ```
  * nos indica que los promts que usualmente van al usuario de inquirer
- * los recive vi para que interactúe con ellos
+ * los recive vi para que interactúe con ellos (a)
  */
 vi.mock('inquirer', () => ({
   default: {
