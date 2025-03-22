@@ -1,6 +1,6 @@
 import { Good } from "./goods.js";
 import { Merchant } from "./mercants.js";
-import { Customer } from "./other_clients.js";
+import { Customer } from "./customer.js";
 
 // Clase para representar una transacción
 export class Transaction {

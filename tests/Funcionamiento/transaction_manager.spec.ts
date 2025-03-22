@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { describe, expect, expectTypeOf, it, test } from "vitest";
-import { Transaction } from '../../src/transaction';
-import { TransactionManager } from '../../src/transaction_manager';
-import { Good } from "../../src/goods";
-import { Merchant } from "../../src/mercants";
+import { describe, expect, test } from "vitest";
+import { Transaction } from '../../src/transaction.js';
+import { TransactionManager } from '../../src/transaction_manager.js';
+import { Good } from "../../src/goods.js";
+import { Merchant } from "../../src/mercants.js";
 
 const transactionManager = new TransactionManager();
 const good1 = new Good(1, "Pocion de Golondrina", "Pocion de Brujo", "Murcielago", 0.1, 100);

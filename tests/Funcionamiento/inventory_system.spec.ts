@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { describe, expect, expectTypeOf, it, test, vi, afterEach} from "vitest";
-import { GoodsManager } from '../../src/inventory_system';
-import { Good } from "../../src/goods";
+import { describe, expect, test, vi, afterEach} from "vitest";
+import { GoodsManager } from '../../src/goodsManager.js';
+import { Good } from "../../src/goods.js";
 //import exp from "constants";
 
 const good1 = new Good(1, "Pocion de Golondrina", "Pocion de Brujo", "Murcielago", 0.1, 100);

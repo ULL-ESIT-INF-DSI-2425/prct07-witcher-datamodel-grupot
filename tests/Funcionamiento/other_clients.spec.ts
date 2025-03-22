@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { describe, expect, expectTypeOf, it, test } from "vitest";
-import { Customer } from '../../src/other_clients';
+import { describe, expect, test } from "vitest";
+import { Customer } from '../../src/customer.js';
 
 const customer1 = new Customer(1, "Geralt", "Brujo", "Rivia");
 const customer2 = new Customer(2, "Doni", "Enano", "Novigrado");

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { describe, expect, expectTypeOf, it, test } from "vitest";
-import { Merchant } from '../../src/mercants';
+import { describe, expect, test } from "vitest";
+import { Merchant } from '../../src/mercants.js';
 
 const merchant1 = new Merchant(1, "Segredus de Continente", "General", "Velen");
 const merchant2 = new Merchant(2, "Iker de Rivia", "Herrero", "Rivia");

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { describe, expect, expectTypeOf, it, test } from "vitest";
+import { describe, expect, test } from "vitest";
 import { Transaction } from "../../src/transaction.js";
 import { Merchant } from "../../src/mercants.js";
 import { Good } from "../../src/goods.js";

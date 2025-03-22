@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { afterEach, describe, expect, expectTypeOf, it, test, vi } from "vitest";
-import { Customer } from '../../src/other_clients';
-import { CustomerManager } from '../../src/other_clients_manager';
+import { afterEach, describe, expect, test, vi } from "vitest";
+import { Customer } from '../../src/customer.js';
+import { CustomerManager } from '../../src/customer_manager.js';
 
 const customerManager = new CustomerManager();
 const customer1 = new Customer(1, "Geralt", "Brujo", "Rivia");

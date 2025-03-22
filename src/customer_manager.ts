@@ -1,4 +1,4 @@
-import { Customer } from './other_clients.js';
+import { Customer } from './customer.js';
 
 export class CustomerManager {
   private _customers: Customer[] = [];

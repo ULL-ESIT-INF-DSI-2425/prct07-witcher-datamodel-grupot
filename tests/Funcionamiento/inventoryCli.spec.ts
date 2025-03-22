@@ -1,10 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import inquirer from "inquirer";
-import { InventoryCLI } from "../../src/inventoryCly";
-import { InventorySystem } from "../../src/inventory_system";
-import { Good } from "../../src/goods";
-
-// TODO: Cambiar el código para que acepte la primera prueba que por alguna razón no va
+import { InventoryCLI } from "../../src/inventoryCly.js";
+import { GoodsManager } from "../../src/goodsManager.js";
+import { Good } from "../../src/goods.js";
 
 /**
  * EXPLICACIÓN DE LAS PRUEBAS:
@@ -26,8 +24,8 @@ vi.mock('inquirer', () => ({
   },
 }));
 
-vi.mock('../../src/inventory_system', () => ({
-  InventorySystem: vi.fn(() => ({
+vi.mock('../../src/goodsManager.js', () => ({
+  GoodsManager: vi.fn(() => ({
     addItem: vi.fn(),
     removeItem: vi.fn(),
     listItems: vi.fn(() => []),
@@ -38,11 +36,11 @@ vi.mock('../../src/inventory_system', () => ({
 
 describe('InventoryCLI', () => {
   let inventoryCLI: InventoryCLI;
-  let mockInventorySystem: InventorySystem;
+  let mockGoodsManager: GoodsManager;
 
   beforeEach(() => {
-    mockInventorySystem = new InventorySystem();
-    inventoryCLI = new InventoryCLI(mockInventorySystem);
+    mockGoodsManager = new GoodsManager();
+    inventoryCLI = new InventoryCLI(mockGoodsManager);
     vi.clearAllMocks();
   });
 
@@ -74,8 +72,8 @@ describe('InventoryCLI', () => {
       .mockResolvedValueOnce({ action: 'Agregar bien' })
       .mockResolvedValueOnce({ id: 1, name: "Pocion de Golondrina", description: "Pocion de Brujo", material: "Murcielago", weight: 0.1, value: 100 });
     await inventoryCLI.manageGoods();
-    expect(mockInventorySystem.addItem).toHaveBeenCalledWith(expect.any(Good));
-    expect(mockInventorySystem.addItem).toHaveBeenCalledWith(
+    expect(mockGoodsManager.addItem).toHaveBeenCalledWith(expect.any(Good));
+    expect(mockGoodsManager.addItem).toHaveBeenCalledWith(
       new Good(1, "Pocion de Golondrina", "Pocion de Brujo", "Murcielago", 0.1, 100)
     );
   });
@@ -85,7 +83,7 @@ describe('InventoryCLI', () => {
       .mockResolvedValueOnce({ action: 'Eliminar bien' })
       .mockResolvedValueOnce({ id: 1 });
     await inventoryCLI.manageGoods();
-    expect(mockInventorySystem.removeItem).toHaveBeenCalledWith(1);
+    expect(mockGoodsManager.removeItem).toHaveBeenCalledWith(1);
   });
 
   it('debe listar bienes cuando se selecciona "Listar bienes"', async () => {
@@ -93,7 +91,7 @@ describe('InventoryCLI', () => {
       .mockResolvedValueOnce({ action: 'Listar bienes' })
       .mockResolvedValueOnce({ orderBy: 'name', ascending: true });
     await inventoryCLI.manageGoods();
-    expect(mockInventorySystem.listItems).toHaveBeenCalledWith('name', true);
+    expect(mockGoodsManager.listItems).toHaveBeenCalledWith('name', true);
   });
 
   it('debe salir cuando se selecciona "Salir"', async () => {

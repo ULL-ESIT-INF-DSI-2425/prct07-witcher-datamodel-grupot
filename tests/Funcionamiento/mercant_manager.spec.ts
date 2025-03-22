@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { afterEach, describe, expect, expectTypeOf, it, test, vi } from "vitest";
-import { Merchant } from '../../src/mercants';
-import { MerchantManager } from "../../src/mercant_manager";
+import { Merchant } from '../../src/mercants.js';
+import { MerchantManager } from "../../src/mercant_manager.js";
 
 const merchantManager = new MerchantManager();
 const merchant1 = new Merchant(1, "Segredus de Continente", "General", "Velen");
