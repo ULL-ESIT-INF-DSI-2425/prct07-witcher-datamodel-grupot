@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1742649679106" clover="3.2.0">
-  <project timestamp="1742649679106" name="All files">
+<coverage generated="1742650289786" clover="3.2.0">
+  <project timestamp="1742650289786" name="All files">
     <metrics statements="353" coveredstatements="333" conditionals="127" coveredconditionals="119" methods="88" coveredmethods="81" elements="568" coveredelements="533" complexity="0" loc="353" ncloc="353" packages="1" files="10" classes="10"/>
     <file name="customer.ts" path="/home/usuario/prct07-witcher-datamodel-grupot/src/customer.ts">
       <metrics statements="16" coveredstatements="16" conditionals="7" coveredconditionals="7" methods="9" coveredmethods="7"/>
