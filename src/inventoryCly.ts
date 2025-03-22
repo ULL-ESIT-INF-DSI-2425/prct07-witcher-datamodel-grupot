@@ -1,14 +1,25 @@
 import inquirer from "inquirer";
-import { InventorySystem } from "./inventory_system.js";
+import { GoodsManager } from "./inventory_system.js";
 import { Good } from "./goods.js";
+import { MerchantManager } from "./mercant_manager.js";
+import { CustomerManager } from "./other_clients_manager.js";
 // import { Merchant } from './mercants.js';
 // import { Customer } from './other_clients.js';
+import { TransactionManager } from './transaction_manager.js';
 
 export class InventoryCLI {
-  private inventory: InventorySystem;
+  private inventory: GoodsManager;
+  private merchantManager: MerchantManager;
+  private customerManager: CustomerManager;
+  private transactionManager: TransactionManager;
 
-  constructor(inventory: InventorySystem) {
+
+  constructor(inventory: GoodsManager, merchantManager: MerchantManager, 
+    customerManager: CustomerManager, transactionManager: TransactionManager) {
     this.inventory = inventory;
+    this.merchantManager = merchantManager;
+    this.customerManager = customerManager;
+    this.transactionManager = transactionManager;
   }
 
   async mainMenu() {
@@ -102,7 +113,7 @@ export class InventoryCLI {
       name: "name",
       message: "Nombre del mercader:",
     });
-    const merchant = this.inventory.findMerchantByName(name);
+    const merchant = this.merchantManager.findMerchantByName(name);
     console.log(merchant || "Mercader no encontrado.");
   }
 
@@ -112,7 +123,7 @@ export class InventoryCLI {
       name: "name",
       message: "Nombre del cliente:",
     });
-    const customer = this.inventory.findCustomerByName(name);
+    const customer = this.customerManager.findCustomerByName(name);
     console.log(customer || "Cliente no encontrado.");
   }
 }

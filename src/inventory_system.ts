@@ -1,18 +1,10 @@
 import { Good } from './goods.js';
-import { Merchant } from './mercants.js';
-import { Customer } from "./other_clients.js";
-import { Transaction } from './transaction.js';
 
 // Clase de gestión del inventario
-export class InventorySystem {
+export class GoodsManager {
   private _items: Good[] = [];
-  private _merchants: Merchant[] = [];
-  private _customers: Customer[] = [];
-  private transactions: Transaction[] = [];
 
   get items() { return this._items; };
-  get merchants() { return this._merchants; }; 
-  get customers() { return this._customers; }; 
 
   /**
    * Añade un item al inventario
@@ -50,7 +42,6 @@ export class InventorySystem {
     }
   }
 
-
   /**
    * Lista todos los items almacenados en orden ascendente por defecto
    * @param orderBy - (string) ordena los objetos según el atributo seleccionado
@@ -64,98 +55,30 @@ export class InventorySystem {
     });
   }
 
-  /**
-   * Método que añade un mercader a nuestro sistema
-   * @param merchant - (Merchant) 
+  /** 
+   * Método para consultar información de bienes especificos
+   * @param id - (number) id del bien a consultar
+   * @returns - (Good | undefined) bien consultado
    */
-  addMerchant(merchant: Merchant) {
-    this._merchants.push(merchant);
+  findItemById(id: number): Good | undefined {
+    return this._items.find(item => item.id === id);
   }
 
   /**
-   * Elimina un mercader con un id específico
-   * @param merchantId - (number)
+   * Método para localizar bienes a través de su nombre
+   * @param name - (string) nombre del bien
+   * @returns - (Good[])
    */
-  removeMerchant(merchantId: number): void {
-    this._merchants = this._merchants.filter(merchant => merchant.id !== merchantId);
+  findItemByName(name: string): Good[] {
+    return this._items.filter((item) => item.name.toLowerCase() === name.toLowerCase());
   }
 
   /**
-   * Actualiza un mercader existente.
-   * @param id - (number) ID del mercader a modificar.
-   * @param name - (string?) nuevo nombre.
-   * @param type - (string?) nuevo tipo.
-   * @param location - (string?) nueva ubicación.
+   * Método para localizar bienes a través de su material
+   * @param material - (string) material del bien
+   * @returns - (Good[])
    */
-  updateMerchant(id: number, name?: string, type?: string, location?: string) {
-    const merchant = this._merchants.find(m => m.id === id);
-    if (merchant) {
-      if (name !== undefined) merchant.name = name;
-      if (type !== undefined) merchant.type = type;
-      if (location !== undefined) merchant.location = location;
-    }
-  }
-
-  /**
-   * Método que añade un cliente a nuestro sistema
-   * @param customer - (Customer)
-   */
-  addCustomer(customer: Customer): void {
-    this._customers.push(customer);
-  }
-
-  /**
-   * Elimina un cliente con un id específico
-   * @param customersId - (number)
-   */
-  removeCustomer(customersId: number): void {
-    this._customers = this._customers.filter(customer => customer.id !== customersId);
-  }
-
-  updateCustomer( id: number,name?: string, race?: string, location?: string ) {
-    const customer = this._customers.find(c => c.id === id);
-    if (customer) {
-      if (name !== undefined) customer.name = name;
-      if (race !== undefined) customer.race = race;
-      if (location !== undefined) customer.location = location;
-    }
-  }
-
-  /**
-   * Método que nos permite encontrar a un mercader 
-   * dentro de nuestro sistema mediante su nombre
-   * @param name - (string) nombre del mercader
-   * @returns - (Merchant | undefined)
-   */
-  findMerchantByName(name: string): Merchant | undefined {
-    return this._merchants.find(m => m.name.toLowerCase() === name.toLowerCase());
-  }
-
-  /**
-   * Método que nos permite encontrar a un cliente 
-   * dentro de nuestro sistema mediante su nombre
-   * @param name - (string)
-   * @returns - (Customer | undefined)
-   */
-  findCustomerByName(name: string): Customer | undefined {
-    return this._customers.find(c => c.name.toLowerCase() === name.toLowerCase());
-  }
-
-  /**
-   * Método que nos permite añadir una transacción
-   * a un vector de almacenamiento
-   * @param transaction - (Transaction)
-   */
-  recordTransaction(transaction: Transaction) {
-    this.transactions.push(transaction);
-  }
-  
-  /**
-   * Método que nos devuelve todas las transacciones
-   * del vector de almacenamiento
-   * @returns Lista de transacciones
-   */
-  listTransactions() {
-    return this.transactions;
+  findItemByMaterial(material: string): Good[] {
+    return this._items.filter((item) => item.material.toLowerCase() === material.toLowerCase());
   }
 }

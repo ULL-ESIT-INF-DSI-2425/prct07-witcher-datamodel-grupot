@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { describe, expect, expectTypeOf, it, test, vi, afterEach} from "vitest";
-import { InventorySystem } from '../../src/inventory_system';
+import { GoodsManager } from '../../src/inventory_system';
+import { MerchantManager } from "../../src/mercant_manager";
+import { CustomerManager } from "../../src/other_clients_manager";
+import { TransactionManager } from "../../src/transaction_manager";
 import { Merchant } from "../../src/mercants";
 import { Good } from "../../src/goods";
 import { Customer } from "../../src/other_clients";
@@ -22,10 +25,10 @@ const merchant3 = new Merchant(3, "Iker de Rivia", "Herrero", "Rivia");
 
 describe("listItems", () => {
   test("Funcionamiento normal", () => {
-    let white_wolf_inn = new InventorySystem();
-    white_wolf_inn.addItem(good1);
-    white_wolf_inn.addItem(good2);
-    expect(white_wolf_inn.listItems("name", true)).toStrictEqual([good2, good1]);
+    let white_wolf_inn_inventory = new GoodsManager();
+    white_wolf_inn_inventory.addItem(good1);
+    white_wolf_inn_inventory.addItem(good2);
+    expect(white_wolf_inn_inventory.listItems("name", true)).toStrictEqual([good2, good1]);
   });
 });
 
@@ -35,7 +38,7 @@ describe("addItem", () => {
   });
 
   test("Funcionamiento normal", () => {
-    let my_system = new InventorySystem();
+    let my_system = new GoodsManager();
     const spy = vi.spyOn(my_system, "addItem");
     expect(my_system.items).toHaveLength(0);
     my_system.addItem(good2);
@@ -51,7 +54,7 @@ describe("removeItem", () => {
   });
 
   test("Funcionamiento normal", () => {
-    let my_system = new InventorySystem();
+    let my_system = new GoodsManager();
     my_system.addItem(good2);
     expect(my_system.items).toHaveLength(1);
     const spy = vi.spyOn(my_system, "removeItem");
@@ -67,7 +70,7 @@ describe("Modificar item", () => {
     vi.restoreAllMocks();
   });
   test("Funcionamiento normal", () => {
-    let my_system = new InventorySystem();
+    let my_system = new GoodsManager();
     my_system.addItem(good3);  
     // const good3 = new Good(2, "Colonia de Lirio y Grosellas", "Una colonia muy especial", "Lirios y grosellas", 0.7, 60);
     my_system.updateGood(3, 'Colonia vacia', undefined, undefined, undefined, undefined);
@@ -79,7 +82,7 @@ describe("Modificar item", () => {
     expect(good.value).toBe(60);
   });
   test("Funcionamiento normal", () => {
-    let my_system = new InventorySystem();
+    let my_system = new GoodsManager();
     my_system.addItem(good3);  
     // const good3 = new Good(2, "Colonia de Lirio y Grosellas", "Una colonia muy especial", "Lirios y grosellas", 0.7, 60);
     my_system.updateGood(3, undefined, 'recipiente vacio', 'nada', 0.3, 10);
@@ -98,7 +101,7 @@ describe("Manipulación y visualización de customers", () => {
     vi.restoreAllMocks(); 
   });
 
-  let my_system = new InventorySystem();
+  let my_system = new CustomerManager();
   test("Adicion de clientes", () => {
     const spy = vi.spyOn(my_system, "addCustomer");
     my_system.addCustomer(customer1);
@@ -141,7 +144,7 @@ describe("Manipulación y visualización de merchants", () => {
     vi.restoreAllMocks(); 
   });
 
-  let my_system = new InventorySystem();
+  let my_system = new MerchantManager();
   test("Adicion de mercaderes", () => {
     const spy = vi.spyOn(my_system, "addMerchant");
     my_system.addMerchant(merchant1);
@@ -153,8 +156,8 @@ describe("Manipulación y visualización de merchants", () => {
   });
 
   test("Visualización de mercaderes", () => {
-    expect(my_system.findMerchantByName("iker de rivia")).toStrictEqual(merchant2);
-    expect(my_system.findMerchantByName("Segredus de Continente")).toStrictEqual(merchant1);
+    expect(my_system.findMerchantByName("Iker de Rivia")).toStrictEqual([merchant2]);
+    expect(my_system.findMerchantByName("Segredus de Continente")).toStrictEqual([merchant1]);
   });
 
   test("Eliminación de mercaderes", () => {
