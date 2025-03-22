@@ -113,4 +113,99 @@ describe("Modificar item", () => {
     expect(good.weight).toBe(0.7);
     expect(good.value).toBe(60);
   });
-});  
+});
+
+
+
+
+
+describe("Control automatico => generar una lista de la compra", () => {
+  test("Debe devolver una lista vacía cuando el peso total de cada bien es suficiente", () => {
+    const manager = new GoodsManager();
+
+
+    // Agregar bienes con peso total  (≥1kg)
+    manager.addItem(new Good(10, "Harina", "Harina de trigo", "Trigo", 0.5, 10));
+    manager.addItem(new Good(10, "Harina", "Harina de trigo", "Trigo", 0.6, 10));
+
+
+    manager.addItem(new Good(20, "Azúcar", "Azúcar blanca", "Caña", 1, 8));
+
+
+    manager.addItem(new Good(30, "Leche", "Leche entera", "Lácteo", 0.4, 5));
+    manager.addItem(new Good(30, "Leche", "Leche entera", "Lácteo", 0.7, 5));
+
+
+    expect(manager.checkStockShortage()).toEqual([]);
+  });
+
+
+  test("Debe detectar un bien con peso total insuficiente", () => {
+    const manager = new GoodsManager();
+
+
+    // "Leche" tiene 0.9kg  total
+    manager.addItem(new Good(10, "Harina", "Harina de trigo", "Trigo", 1.2, 10));
+    manager.addItem(new Good(20, "Azúcar", "Azúcar blanca", "Caña", 1, 8));
+    manager.addItem(new Good(30, "Leche", "Leche entera", "Lácteo", 0.5, 5));
+    manager.addItem(new Good(30, "Leche", "Leche entera", "Lácteo", 0.4, 5));
+
+
+    const shortage = manager.checkStockShortage();
+    expect(shortage.length).toBe(1);
+    expect(shortage[0].getName).toBe("Leche");
+  });
+
+
+  test("Debe detectar múltiples bienes con peso insuficiente", () => {
+    const manager = new GoodsManager();
+
+
+    // "Harina" (0.6kg) y "Azúcar" (0.8kg)
+    manager.addItem(new Good(10, "Harina", "Harina de trigo", "Trigo", 0.3, 10));
+    manager.addItem(new Good(10, "Harina", "Harina de trigo", "Trigo", 0.3, 10));
+
+
+    manager.addItem(new Good(20, "Azúcar", "Azúcar blanca", "Caña", 0.4, 8));
+    manager.addItem(new Good(20, "Azúcar", "Azúcar blanca", "Caña", 0.4, 8));
+
+
+    manager.addItem(new Good(30, "Leche", "Leche entera", "Lácteo", 1.2, 5));
+
+
+    const shortage = manager.checkStockShortage();
+    expect(shortage.length).toBe(2);
+    expect(shortage.find((item) => item.getName === "Harina")).toBeDefined();
+    expect(shortage.find((item) => item.getName === "Azúcar")).toBeDefined();
+  });
+
+
+  test("Debe devolver todos los bienes requeridos si el inventario está vacío", () => {
+    const manager = new GoodsManager();
+    const shortage = manager.checkStockShortage();
+    expect(shortage.length).toBe(0);
+  });
+
+
+  test("Debe detectar un umbral menor con pesos personalizados", () => {
+    const manager = new GoodsManager();
+
+
+    // "Harina" (0.9kg) y "Huevos" (0.7kg)
+    manager.addItem(new Good(10, "Harina", "Harina de trigo", "Trigo", 0.9, 10));
+
+
+    manager.addItem(new Good(30, "Leche", "Leche entera", "Lácteo", 1.5, 5));
+
+
+    manager.addItem(new Good(40, "Huevos", "Huevos frescos", "Huevo", 0.7, 6));
+
+
+    const shortage = manager.checkStockShortage();
+    expect(shortage.length).toBe(2);
+    expect(shortage.find((item) => item.getName === "Harina")).toBeDefined();
+    expect(shortage.find((item) => item.getName === "Huevos")).toBeDefined();
+  });
+});
+
+

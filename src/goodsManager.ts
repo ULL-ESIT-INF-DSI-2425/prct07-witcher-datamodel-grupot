@@ -81,4 +81,31 @@ export class GoodsManager {
   findItemByMaterial(material: string): Good[] {
     return this._items.filter((item) => item.material.toLowerCase() === material.toLowerCase());
   }
+  
+  
+  /**
+   * Verifica si el peso total de cada bien esencial es inferior a 1 kg.
+   * Se define una lista de ingredientes esenciales y se suma el peso de todos los bienes en el inventario
+   * con ese nombre. Si el peso total es menor a 1 kg, se incluye un representante de ese bien en la lista.
+   * @returns - (Good[]) lista de bienes (representantes) cuyo peso total es insuficiente.
+   */
+  checkStockShortage(): Good[] {
+    const ItemBasicos = ["Harina", "Azúcar", "Leche", "Huevos", "Mantequilla"];
+    const lista_compra: Good[] = [];
+    
+    for (const name of ItemBasicos) {
+     const goods = this.findItemByName(name);
+     if (goods.length > 0) {
+       const totalWeight = goods.reduce((sum, item) => sum + item.getWeight, 0);
+       if (totalWeight < 1) {
+        // Se añade el primer bien de ese tipo como representante
+        lista_compra.push(goods[0]);
+       }
+     }
+    }
+    return lista_compra;
+  }
 }
+
+
+
