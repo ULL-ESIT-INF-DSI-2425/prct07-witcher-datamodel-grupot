@@ -105,7 +105,8 @@ describe("Modificar item", () => {
     my_system.addItem(good3);  
     // const good3 = new Good(2, "Colonia de Lirio y Grosellas", "Una colonia muy especial", "Lirios y grosellas", 0.7, 60);
     my_system.updateGood(3, 'Colonia vacia', undefined, undefined, undefined, undefined);
-    const good = my_system.items.find(item => item.id === 3);
+    const good: (Good | undefined) = my_system.items.find(item => item.id === 3);
+    expect("getId" in good).toBe(true);
     expect(good.name).toBe('Colonia vacia');
     expect(good.description).toBe('Una colonia muy especial');
     expect(good.material).toBe('Lirios y grosellas');
