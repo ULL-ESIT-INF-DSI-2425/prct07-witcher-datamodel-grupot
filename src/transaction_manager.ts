@@ -3,17 +3,12 @@ import { Transaction } from './transaction.js';
 export class TransactionManager {
   private transactions: Transaction[] = [];
 
-  // Add a new transaction
-  addTransaction(transaction: Transaction): void {
-    this.transactions.push(transaction);
+  get getTransactions(): Transaction[] {
+    return this.transactions;
   }
 
-  /**
-   * Método que nos permite añadir una transacción
-   * a un vector de almacenamiento
-   * @param transaction - (Transaction)
-   */
-  recordTransaction(transaction: Transaction) {
+  // Add a new transaction
+  addTransaction(transaction: Transaction): void {
     this.transactions.push(transaction);
   }
   
