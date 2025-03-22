@@ -16,12 +16,12 @@ describe('consultarStock', () => {
     inventory = new GoodsManager();
     inventory.addItem(new Good(1, 'Espada de Fuego', 'Una espada ardiente', 'Hierro', 3.5, 100));
     inventory.addItem(new Good(2, 'Escudo de Hierro', 'Un escudo resistente', 'Hierro', 5.0, 75));
-    informe = new reportGen(inventory);
+    informe = new reportGen(inventory, new TransactionManager());
   });
 
   test('debería mostrar un mensaje si el inventario está vacío', async () => {
     inventory = new GoodsManager(); 
-    informe = new reportGen(inventory);
+    informe = new reportGen(inventory, new TransactionManager());
     const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     await informe.consultarStock();
     expect(consoleSpy).toHaveBeenCalledWith('El inventario está vacío.');
