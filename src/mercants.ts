@@ -1,3 +1,4 @@
+// Clase que representa a un mercader
 export class Merchant {
   constructor(
     public id: number,
@@ -6,6 +7,7 @@ export class Merchant {
     public location: string
   ) {}
 
+  // Getters y setters
   get getId() { return this.id; };
   get getName() { return this.name; };
   get getType() { return this.type; };

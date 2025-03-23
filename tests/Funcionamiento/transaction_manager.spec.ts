@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, expect, test } from "vitest";
 import { Transaction } from '../../src/transaction.js';
 import { TransactionManager } from '../../src/transaction_manager.js';

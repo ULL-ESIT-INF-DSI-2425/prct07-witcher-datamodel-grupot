@@ -1,8 +1,10 @@
 import { Customer } from './customer.js';
 
+// Clase que gestiona a los clientes
 export class CustomerManager {
   private _customers: Customer[] = [];
 
+  // Getters
   get customers() { return this._customers; };
 
   /**
@@ -21,6 +23,16 @@ export class CustomerManager {
     this._customers = this._customers.filter(customer => customer.id !== customersId);
   }
 
+  /**
+   * 
+   * @param id - (number) ID del cliente a modificar
+   * @param name - (string?) nuevo nombre
+   * @param race - (string?) nueva raza
+   * @param location - (string?) nueva ubicación
+   * @example
+   * updateCustomer(1, 'Arthas', 'Human', 'Lordaeron');
+   * Actualiza el cliente con id 1 con los nuevos valores
+   */
   updateCustomer( id: number,name?: string, race?: string, location?: string ) {
     const customer = this._customers.find(c => c.id === id);
     if (customer) {

@@ -1,5 +1,8 @@
 import { Merchant } from './mercants.js';
 
+/**
+ * Clase que sirve para manejar a los mercaderes.
+ */
 export class MerchantManager {
   private _merchants: Merchant[] = [];
 

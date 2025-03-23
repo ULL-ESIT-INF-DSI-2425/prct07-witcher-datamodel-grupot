@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { Customer } from '../../src/customer.js';
 import { CustomerManager } from '../../src/customer_manager.js';

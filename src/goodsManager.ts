@@ -4,6 +4,7 @@ import { Good } from './goods.js';
 export class GoodsManager {
   private _items: Good[] = [];
 
+  // Getters y setters
   get items() { return this._items; };
 
   /**

@@ -1,3 +1,4 @@
+// Clase que representa a un cliente
 export class Customer {
   constructor(
     public id: number,
@@ -6,6 +7,7 @@ export class Customer {
     public location: string
   ) {}
 
+  // Getters y setters
   get getId() { return this.id; };
   get getName() { return this.name; };
   get getRace() { return this.race; };

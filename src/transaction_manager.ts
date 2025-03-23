@@ -1,13 +1,21 @@
 import { Transaction } from './transaction.js';
 
+// Clase que gestiona las transacciones
 export class TransactionManager {
   private transactions: Transaction[] = [];
 
+  /**
+   * Método que sirve para obtener todas las transacciones
+   * @returns Lista de transacciones
+   */
   get getTransactions(): Transaction[] {
     return this.transactions;
   }
 
-  // Add a new transaction
+  /**
+   * Método que añade una transacción al vector de almacenamiento
+   * @param transaction - Transacción a añadir
+   */
   addTransaction(transaction: Transaction): void {
     this.transactions.push(transaction);
   }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, expect, test, vi, afterEach} from "vitest";
 import { GoodsManager } from '../../src/goodsManager.js';
 import { Good } from "../../src/goods.js";

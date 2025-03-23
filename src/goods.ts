@@ -1,3 +1,4 @@
+// Clase que representa un bien
 export class Good {
   constructor(
     public id: number,
@@ -8,6 +9,7 @@ export class Good {
     public value: number
   ) {}
 
+  // Getters y setters
   get getId() { return this.id; };
   get getName() { return this.name; };
   get getDescription() { return this.description; };

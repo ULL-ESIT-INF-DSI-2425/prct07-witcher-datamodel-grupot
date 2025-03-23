@@ -13,6 +13,7 @@ export class Transaction {
       public type: "Compra" | "Venta" | "Devolución"
   ) {}
 
+  // Getters y setters
   get getId() { return this.id; };
   get getDate() { return this.date; };
   get getBuyerSeller() { return this.buyerOrSeller; };
@@ -28,8 +29,9 @@ export class Transaction {
   setType(new_type: "Compra" | "Venta" | "Devolución") { this.type = new_type; };
 
   /**
-   * Calcula el total de la transacción sumando el valor de todos los bienes.
-   */
+   * Calcula el total de la transacción.
+   * @returns El total de la transacción.
+    */
   calcularTotal(): void {
   this.totalAmount = this.goods.reduce((sum, good) => sum + good.getValue, 0);
   }

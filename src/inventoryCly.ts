@@ -7,6 +7,7 @@ import { CustomerManager } from "./customer_manager.js";
 // import { Customer } from './other_clients.js';
 import { TransactionManager } from './transaction_manager.js';
 
+// Clase que representa la interfaz de línea de comandos
 export class InventoryCLI {
   private inventory: GoodsManager;
   private merchantManager: MerchantManager;
@@ -21,6 +22,10 @@ export class InventoryCLI {
     this.transactionManager = transactionManager;
   }
 
+  /**
+   * Método que inicia el menú principal.
+   * @returns Promesa que se resuelve cuando el usuario decide salir.
+   */
   async mainMenu() {
     const choices = [
       "Gestionar bienes",
@@ -53,6 +58,10 @@ export class InventoryCLI {
     await this.mainMenu();
   }
 
+  /**
+   * Método que gestiona los bienes.
+   * @returns Promesa que se resuelve cuando el usuario decide volver.
+   */
   async manageGoods() {
     const choices = [
       "Agregar bien",
@@ -106,6 +115,10 @@ export class InventoryCLI {
     }
   }
 
+  /**
+   * Método que consulta los mercaderes.
+   * @returns Promesa que se resuelve cuando el usuario decide volver.
+   */
   async consultMerchants() {
     const { name } = await inquirer.prompt({
       type: "input",
@@ -116,6 +129,10 @@ export class InventoryCLI {
     console.log(merchant || "Mercader no encontrado.");
   }
 
+  /**
+   * Método que busca clientes.
+   * @returns Promesa que se resuelve cuando el usuario decide volver.
+   */
   async consultCustomers() {
     const { name } = await inquirer.prompt({
       type: "input",
