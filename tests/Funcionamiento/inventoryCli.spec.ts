@@ -56,8 +56,8 @@ describe('InventoryCLI', () => {
       type: "list",
       name: "option",
       message: "Selecciona una opción:",
-      choices: ["Gestionar bienes", "Consultar mercaderes", "Buscar clientes", "Salir"],
-    });
+      choices: ["Gestionar bienes", "Gestionar mercaderes", "Gestionar clientes", "Salir"]
+    });    
   
     expect(inquirer.prompt).toHaveBeenCalledWith({
       type: "list",
